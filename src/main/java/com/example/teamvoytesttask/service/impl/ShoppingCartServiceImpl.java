@@ -5,7 +5,9 @@ import com.example.teamvoytesttask.model.ShoppingCart;
 import com.example.teamvoytesttask.model.User;
 import com.example.teamvoytesttask.repository.ShoppingCartRepository;
 import com.example.teamvoytesttask.service.ShoppingCartService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final ShoppingCartRepository shoppingCartRepository;
 
@@ -29,7 +31,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Override
     public void clear(ShoppingCart shoppingCart) {
         shoppingCart.setProducts(null);
-        shoppingCartRepository.update(shoppingCart);
+        shoppingCartRepository.save(shoppingCart);
     }
 
     @Override

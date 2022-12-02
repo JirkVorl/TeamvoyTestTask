@@ -20,7 +20,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role getByName(String roleName) {
-        return roleRepository.findByName(roleName).orElseThrow(
+        return roleRepository.findByName(Role.RoleName.valueOf(roleName)).orElseThrow(
                 () -> new RuntimeException("Role with name " + roleName + " not found")
         );
     }
