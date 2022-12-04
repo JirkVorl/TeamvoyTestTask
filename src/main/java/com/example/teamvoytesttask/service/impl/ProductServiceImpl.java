@@ -21,6 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product buy(Product product, int quantity) {
-        return null;
+        Product productFromDb = productRepository.findByName(product.getName()).orElseThrow(
+                () -> new RuntimeException("Can't get product by name " + product.getName()));
+        productFromDb.setQuantity(product.getQuantity() - quantity);
+        return productRepository.save(productFromDb);
     }
 }
