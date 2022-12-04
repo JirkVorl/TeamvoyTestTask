@@ -36,6 +36,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void addProduct(Product product, User user) {
-
+        ShoppingCart shoppingCart = shoppingCartRepository.findByUser(user).orElseThrow(
+                () -> new RuntimeException("Can't get shopping cart by user " + user));
+        shoppingCart.getProducts().add(product);
+        shoppingCartRepository.save(shoppingCart);
     }
 }

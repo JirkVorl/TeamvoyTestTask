@@ -1,6 +1,7 @@
 package com.example.teamvoytesttask.service.impl;
 
 import com.example.teamvoytesttask.model.Order;
+import com.example.teamvoytesttask.model.Product;
 import com.example.teamvoytesttask.model.ShoppingCart;
 import com.example.teamvoytesttask.repository.OrderRepository;
 import com.example.teamvoytesttask.service.OrderService;
@@ -31,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
         order.setProducts(shoppingCart.getProducts());
         order.setUser(shoppingCart.getUser());
         orderRepository.save(order);
+        for (Product currentProduct : order.getProducts()) {
+            productService.buy(currentProduct, currentProduct.getQuantity());
+        }
         shoppingCartService.clear(shoppingCart);
         return order;
     }
